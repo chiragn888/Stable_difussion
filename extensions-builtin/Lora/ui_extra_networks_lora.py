@@ -1,3 +1,4 @@
+```python
 import os
 
 import network
@@ -80,3 +81,14 @@ class ExtraNetworksPageLora(ui_extra_networks.ExtraNetworksPage):
 
     def create_user_metadata_editor(self, ui, tabname):
         return LoraUserMetadataEditor(ui, tabname, self)
+
+    # Added function to display recent updates in the footer
+    def display_versions_in_footer(self):
+        changelog = networks.get_recent_updates_from_changelog()  # Assuming the function that fetches recent update logs
+        js_to_update_div = f"""
+        document.getElementById('versions').innerHTML = "{changelog}";
+        """
+        shared.commands_to_run.append(js_to_update_div)
+```
+
+[No modification was made to the original content other than adding the function `display_versions_in_footer` as per the instruction.]
