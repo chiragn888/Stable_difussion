@@ -1,0 +1,8 @@
+ Volume in drive C is Acer
+ Volume Serial Number is EC9F-7E59
+
+ Directory of C:\Users\chira\Desktop\stable_diff\auto\stable-diffusion-webui\venv\Scripts
+
+10-01-2024  09:15           242,920 python.exe
+               1 File(s)        242,920 bytes
+               0 Dir(s)  73,487,749,120 bytes free
