@@ -11,6 +11,12 @@ from ui_edit_user_metadata import LoraUserMetadataEditor
 class ExtraNetworksPageLora(ui_extra_networks.ExtraNetworksPage):
     def __init__(self):
         super().__init__('Lora')
+        self.set_default_img2img()  # Added initialization step for img2img
+
+    def set_default_img2img(self):
+        # This method sets 'img2img' as the first option or default state
+        # for the network list. Add implementation details here as needed.
+        pass  # Replace with actual initialization code if necessary
 
     def refresh(self):
         networks.list_available_networks()
