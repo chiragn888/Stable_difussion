@@ -12,7 +12,7 @@ function dimensionChange(e, is_width, is_height) {
         currentHeight = e.target.value * 1.0;
     }
 
-    var inImg2img = gradioApp().querySelector("#tab_img2img").style.display == "block";
+    var inImg2img = gradioApp().querySelector("#tab_img2img").style.display == "block" && window.hiresFixEnabled;
 
     if (!inImg2img) {
         return;
@@ -42,6 +42,18 @@ function dimensionChange(e, is_width, is_height) {
         }
 
 
+        // Add Hires fix checkbox
+        var hiresFixContainer = document.createElement('div');
+        hiresFixContainer.id = "hiresFixContainer";
+        var hiresFixCheckbox = document.createElement('input');
+        hiresFixCheckbox.type = "checkbox";
+        hiresFixCheckbox.id = "hiresFixCheckbox";
+        var hiresFixLabel = document.createElement('label');
+        hiresFixLabel.htmlFor = "hiresFixCheckbox";
+        hiresFixLabel.innerText = "Enable Hires fix";
+        hiresFixContainer.appendChild(hiresFixCheckbox);
+        hiresFixContainer.appendChild(hiresFixLabel);
+        gradioApp().querySelector("#tab_img2img").appendChild(hiresFixContainer);
 
         var viewportOffset = targetElement.getBoundingClientRect();
 
@@ -88,6 +100,13 @@ onAfterUiUpdate(function() {
     }
     var tabImg2img = gradioApp().querySelector("#tab_img2img");
     if (tabImg2img) {
+        // Event listener for Hires fix checkbox
+        var hiresFixCheckbox = gradioApp().querySelector("#hiresFixCheckbox");
+        if (hiresFixCheckbox) {
+            hiresFixCheckbox.addEventListener('change', function() {
+                window.hiresFixEnabled = hiresFixCheckbox.checked;
+            });
+        }
         var inImg2img = tabImg2img.style.display == "block";
         if (inImg2img) {
             let inputs = gradioApp().querySelectorAll('input');
@@ -111,3 +130,8 @@ onAfterUiUpdate(function() {
         }
     }
 });
+        // Restore Hires fix checkbox state
+        var hiresFixCheckbox = gradioApp().querySelector("#hiresFixCheckbox");
+        if (hiresFixCheckbox) {
+            hiresFixCheckbox.checked = window.hiresFixEnabled || false;
+        }
